@@ -203,17 +203,17 @@ A structured process for evaluating new HubSpot features before enabling them in
 
 Click any link below to open the full designed document:
 
-- 📄 [Workflow — Lead Nurture](https://clementokeniyi.github.io/hubspot-portfolio/workflow-sop.html)
-- 📄 [Sequences — Cold Outreach](https://clementokeniyi.github.io/hubspot-portfolio/sequences-sop.html)
-- 📄 [Lead Scoring Model](https://clementokeniyi.github.io/hubspot-portfolio/lead-scoring-sop.html)
-- 📄 [Data Quality & CRM Hygiene](https://clementokeniyi.github.io/hubspot-portfolio/data-quality-sop.html)
-- 📄 [Salesforce Integration](https://clementokeniyi.github.io/hubspot-portfolio/salesforce-integration-sop.html)
-- 📄 [User Permissions & Teams](https://clementokeniyi.github.io/hubspot-portfolio/user-permissions-sop.html)
-- 📄 [Customer Journey Map](https://clementokeniyi.github.io/hubspot-portfolio/customer-journey-sop.html)
-- 📄 [Automation Troubleshooting](https://clementokeniyi.github.io/hubspot-portfolio/automation-troubleshooting-sop.html)
-- 📄 [CRM Data Architecture](https://clementokeniyi.github.io/hubspot-portfolio/crm-data-architecture-sop.html)
-- 📄 [HubSpot AI — Breeze Capabilities](https://clementokeniyi.github.io/hubspot-portfolio/ai-capabilities-sop.html)
-- 📄 [Beta Feature Evaluation](https://clementokeniyi.github.io/hubspot-portfolio/beta-feature-evaluation-sop.html)
+- 📄 [Workflow — Lead Nurture](https://clementokeniyi.github.io/hubspot-setup/workflow-sop.html)
+- 📄 [Sequences — Cold Outreach](https://clementokeniyi.github.io/hubspot-setup/sequences-sop.html)
+- 📄 [Lead Scoring Model](https://clementokeniyi.github.io/hubspot-setup/lead-scoring-sop.html)
+- 📄 [Data Quality & CRM Hygiene](https://clementokeniyi.github.io/hubspot-setup/data-quality-sop.html)
+- 📄 [Salesforce Integration](https://clementokeniyi.github.io/hubspot-setup/salesforce-integration-sop.html)
+- 📄 [User Permissions & Teams](https://clementokeniyi.github.io/hubspot-setup/user-permissions-sop.html)
+- 📄 [Customer Journey Map](https://clementokeniyi.github.io/hubspot-setup/customer-journey-sop.html)
+- 📄 [Automation Troubleshooting](https://clementokeniyi.github.io/hubspot-setup/automation-troubleshooting-sop.html)
+- 📄 [CRM Data Architecture](https://clementokeniyi.github.io/hubspot-setup/crm-data-architecture-sop.html)
+- 📄 [HubSpot AI — Breeze Capabilities](https://clementokeniyi.github.io/hubspot-setup/ai-capabilities-sop.html)
+- 📄 [Beta Feature Evaluation](https://clementokeniyi.github.io/hubspot-setup/beta-feature-evaluation-sop.html)
 
 ## Stack
 
