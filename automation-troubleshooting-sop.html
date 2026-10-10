@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Automation Troubleshooting SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:1000px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+.table tr:last-child td{border-bottom:none}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#fcd34d;line-height:1.6;margin-top:8px}
+
+/* Decision tree */
+.tree{padding:20px;display:flex;flex-direction:column;align-items:center;gap:0}
+.tree-node{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:12px;font-weight:600;color:#fff;text-align:center;max-width:280px;width:100%}
+.tree-node.start{border-color:var(--accent);background:rgba(59,130,246,.1);color:var(--accent)}
+.tree-node.check{border-color:var(--orange);background:rgba(245,158,11,.1);color:#fbbf24}
+.tree-node.action{border-color:var(--green);background:rgba(6,214,160,.08);color:var(--green)}
+.tree-node.escalate{border-color:var(--red);background:rgba(239,68,68,.08);color:#f87171}
+.tree-connector{display:flex;flex-direction:column;align-items:center;gap:0;margin:0 auto}
+.tree-arrow{width:2px;height:20px;background:var(--border)}
+.tree-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 0}
+.tree-branch{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:12px;width:100%;margin-top:0}
+.tree-branch-line{height:2px;background:var(--border);margin-top:16px}
+.branch-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.branch-yes{color:var(--green);font-size:10px;font-weight:700;text-transform:uppercase}
+.branch-no{color:var(--red);font-size:10px;font-weight:700;text-transform:uppercase}
+
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.sev-1{background:rgba(239,68,68,.2);color:var(--red)}
+.sev-2{background:rgba(245,158,11,.2);color:var(--orange)}
+.sev-3{background:rgba(59,130,246,.2);color:var(--accent)}
+</style>
+</head>
+<body>
+
+<h1>Automation Troubleshooting SOP</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Scope</div>
+  <div class="box">
+    <div style="font-size:13px;color:var(--muted);line-height:1.6">This SOP covers how to diagnose and resolve issues with HubSpot automations — including Workflows, Sequences, Forms, and Email sends. Follow this playbook before escalating to HubSpot support. Most automation failures fall into three root causes: enrolment criteria not met, missing contact properties, or timing/delay misconfigurations.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Severity classification</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Severity</th><th>Definition</th><th>Response time</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag sev-1">SEV-1 Critical</span></td><td>Automation is completely broken, affecting live leads or causing data corruption</td><td>Fix within 2 hours</td><td>Form not capturing submissions, workflow enrolling everyone incorrectly, sequence sending to wrong contacts</td></tr>
+        <tr><td><span class="tag sev-2">SEV-2 High</span></td><td>Automation is partially broken, affecting a subset of contacts or causing delays</td><td>Fix within 24 hours</td><td>Delay in workflow not working, branch logic taking wrong path, email not sending on schedule</td></tr>
+        <tr><td><span class="tag sev-3">SEV-3 Low</span></td><td>Minor issue, no data loss, non-urgent</td><td>Fix within 1 week</td><td>Email subject line typo, notification going to wrong owner, minor formatting issue</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Workflow troubleshooting decision tree</div>
+  <div class="box" style="padding:16px 12px">
+    <div class="tree">
+      <div class="tree-node start">Contact not enrolling in workflow?</div>
+      <div class="tree-connector"><div class="tree-arrow"></div></div>
+      <div class="tree-node check">Check: Is the workflow ON (not Draft/Paused)?</div>
+      <div class="tree-connector">
+        <div class="tree-arrow"></div>
+      </div>
+      <div class="tree-branch">
+        <div class="branch-col">
+          <div class="branch-no">NO</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node action" style="font-size:11px">Turn workflow ON. Test with a new contact enrolment.</div>
+        </div>
+        <div style="width:2px;background:var(--border);min-height:60px"></div>
+        <div class="branch-col">
+          <div class="branch-yes">YES</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node check" style="font-size:11px">Does the contact meet ALL enrolment criteria?</div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="tree-branch" style="margin-top:8px">
+        <div class="branch-col">
+          <div class="branch-no">NO</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node action" style="font-size:11px">Update contact properties to match trigger criteria. Re-check enrolment.</div>
+        </div>
+        <div style="width:2px;background:var(--border);min-height:60px"></div>
+        <div class="branch-col">
+          <div class="branch-yes">YES</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node check" style="font-size:11px">Is "Re-enrolment" allowed in workflow settings?</div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="tree-branch" style="margin-top:8px">
+        <div class="branch-col">
+          <div class="branch-no">Contact was previously enrolled</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node action" style="font-size:11px">Enable re-enrolment in workflow settings OR manually enrol the contact.</div>
+        </div>
+        <div style="width:2px;background:var(--border);min-height:60px"></div>
+        <div class="branch-col">
+          <div class="branch-yes">Still not enrolling</div>
+          <div class="tree-arrow" style="width:2px;height:14px;background:var(--border)"></div>
+          <div class="tree-node escalate" style="font-size:11px">Check Workflow History tab → Filter by "Not enrolled" to see the rejection reason.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Common errors & fixes</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Error</th><th>Root cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600">Contact not enrolling in workflow</td>
+          <td>Trigger criteria not met; workflow paused; contact previously unenrolled</td>
+          <td>1. Verify contact meets every AND condition in the trigger. 2. Check workflow is ON. 3. Enable re-enrolment if contact was enrolled before. 4. Check Workflow → History tab for unenrolment reason.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Email in workflow not sending</td>
+          <td>Contact is unsubscribed; email is a draft; contact's email field is empty</td>
+          <td>1. Check contact's email subscription status. 2. Confirm the email inside the workflow is Published, not Draft. 3. Verify the contact record has a valid email address.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Branch logic taking wrong path</td>
+          <td>Condition using "is equal to" instead of "contains"; property value has a typo; timing issue with property update</td>
+          <td>1. Review the branch condition. Use "contains" for text fields where values may vary. 2. Check the actual value on the contact record — it may differ from what the branch expects. 3. Add a 5-minute delay before the branch to allow upstream property updates to process.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Sequence email not sending</td>
+          <td>Contact unenrolled manually; task not completed; contact replied (auto-unenrolled)</td>
+          <td>1. Open the contact record → Sequences tab. Confirm enrolment status. 2. If a task is in the sequence, check if it was marked complete. 3. Check if the contact replied — sequences auto-unenrol on reply. Re-enrol manually if needed.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Form not capturing submissions</td>
+          <td>Form embed code is outdated; form is unpublished; GDPR field missing</td>
+          <td>1. Re-copy the embed code from HubSpot (Marketing → Forms → Share → Embed code). 2. Confirm the form is Published. 3. If using GDPR features, ensure the consent checkbox is included in the form.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Workflow updating wrong contacts</td>
+          <td>Trigger is too broad; missing AND conditions; all contacts segment selected</td>
+          <td>1. Add additional AND conditions to narrow the trigger. 2. Test using "Test" mode or manually enrol one contact to verify behaviour. 3. Review the enrolled count in the Performance tab and pause if it looks incorrect.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Delay not working as expected</td>
+          <td>Delay is set in working hours; timezone mismatch; delay skipped due to enrolment time</td>
+          <td>1. Check if the delay is "Wait X days" vs "Wait until time" — they behave differently. 2. Confirm the account timezone in Settings → Account → Time zone. 3. If using "Wait until a specific day/time", verify the day of enrolment vs the next occurrence of that time.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Where to find automation logs in HubSpot</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Log location</th><th>What it shows</th><th>How to access</th></tr></thead>
+      <tbody>
+        <tr><td>Workflow History</td><td>Every contact enrolled, unenrolled, and step-by-step action log with timestamps</td><td>Automations → Workflows → [Workflow name] → History tab</td></tr>
+        <tr><td>Contact timeline</td><td>All automation events on a specific contact (enrolments, emails sent, tasks created)</td><td>Contact record → Activity tab → Filter by "Workflow"</td></tr>
+        <tr><td>Email send log</td><td>Who received the email, delivery status, open/click data</td><td>Marketing → Email → [Email name] → Performance tab → Recipients</td></tr>
+        <tr><td>Form submissions</td><td>All form submissions with field values and contact created/updated</td><td>Marketing → Forms → [Form name] → Submissions tab</td></tr>
+        <tr><td>Sequence enrolment log</td><td>Who is enrolled, which step they're on, unenrolment reason</td><td>CRM → Contacts → [Contact] → Sequences tab</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">When troubleshooting, always start with the contact record's Activity timeline — it shows the exact automation events in chronological order and is the fastest way to understand what happened and when.</div>
+  <div class="warn">HubSpot Workflows are a paid (Professional+) feature. In the Fyzer Co free demo account, workflow troubleshooting is documented as the SOP for when the account is on Professional plan. The free tier supports basic automation through Forms (trigger notifications on submission) and meeting scheduler workflows only.</div>
+</div>
+
+</body>
+</html>

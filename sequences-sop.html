@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sequences SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:900px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}
+.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.box-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.box-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+.flow{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:4px 0}
+.step{display:flex;align-items:flex-start;gap:14px;margin-bottom:0}
+.step-line{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0}
+.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.dot-trigger{background:rgba(59,130,246,.2);border:2px solid var(--accent);color:var(--accent)}
+.dot-email{background:rgba(6,214,160,.2);border:2px solid var(--green);color:var(--green)}
+.dot-delay{background:rgba(139,92,246,.2);border:2px solid var(--purple);color:var(--purple)}
+.dot-task{background:rgba(245,158,11,.2);border:2px solid var(--orange);color:var(--orange)}
+.dot-end{background:rgba(239,68,68,.2);border:2px solid var(--red);color:var(--red)}
+.connector{width:2px;background:var(--border);height:28px;margin:0 auto}
+.step-body{padding-top:5px;padding-bottom:28px;min-width:0}
+.step-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.lbl-trigger{color:var(--accent)}
+.lbl-email{color:var(--green)}
+.lbl-delay{color:var(--purple)}
+.lbl-task{color:var(--orange)}
+.lbl-end{color:var(--red)}
+.step-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.table tr:last-child td{border-bottom:none}
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-free{background:rgba(6,214,160,.15);color:var(--green)}
+.tag-paid{background:rgba(239,68,68,.15);color:var(--red)}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+</style>
+</head>
+<body>
+
+<h1>Sequences SOP: Cold Outreach — Demo Request</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Overview</div>
+  <div class="box">
+    <div class="box-title">Purpose</div>
+    <div class="box-desc">Enrol every qualified prospect into a 5-step, 14-day outreach sequence after a demo request or manual sales enrolment. The sequence alternates between personalised emails and manual call tasks to maximise touch points without over-contacting. A contact is automatically unenrolled the moment they reply or book a meeting.</div>
+  </div>
+  <div class="box">
+    <div class="box-title">Enrolment trigger</div>
+    <div class="box-desc">Sales rep manually enrols a contact from the contact record or from the Sequences dashboard. Contacts with Lifecycle Stage = MQL and Lead Status = Open are eligible.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Sequence map — 5 steps over 14 days</div>
+  <div class="box" style="padding:24px 28px">
+    <div class="flow">
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-trigger">⚡</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-trigger">Enrolment</div>
+          <div class="step-title">Contact enrolled by sales rep</div>
+          <div class="step-desc">Rep enrols the contact from their HubSpot record or the Sequences tab. Enrolment uses the rep's connected inbox so all emails are sent from their address.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-email">1</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-email">Step 1 — Day 1 · Email</div>
+          <div class="step-title">Cold intro: "Quick question about {{company}}'s revenue ops"</div>
+          <div class="step-desc">Personalised cold email referencing company name and pain point. Template: Cold Outreach — Demo Request (saved in Message Templates). Sent immediately on enrolment.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 2 business days</div>
+          <div class="step-desc">If no reply, move to Step 2.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-task">2</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-task">Step 2 — Day 3 · Call task</div>
+          <div class="step-title">Manual task: call the prospect</div>
+          <div class="step-desc">Creates a task for the rep to make a call. Call script: reference the email sent on Day 1, ask about current RevOps stack, offer to schedule a 20-min demo. Log outcome as Connected or No Answer.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 3 business days</div>
+          <div class="step-desc">If no connection, move to Step 3.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-email">3</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-email">Step 3 — Day 6 · Email</div>
+          <div class="step-title">Value email: "How teams like yours cut deal cycle time by 30%"</div>
+          <div class="step-desc">Shares a one-paragraph case study or stat relevant to the prospect's industry. Soft CTA: "Would a quick overview be useful?" No hard sell.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 3 business days</div>
+          <div class="step-desc">If no reply, move to Step 4.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-email">4</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-email">Step 4 — Day 9 · Email</div>
+          <div class="step-title">Social proof email: "What Pipeline IQ said after 60 days with Fyzer"</div>
+          <div class="step-desc">Short testimonial-style email. One quote from a fictional Fyzer customer. CTA: "Happy to send over a quick overview doc — just say the word."</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 5 business days</div>
+          <div class="step-desc">Final wait before breakup email.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-email">5</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-email">Step 5 — Day 14 · Email</div>
+          <div class="step-title">Breakup email: "Closing the loop"</div>
+          <div class="step-desc">Short, low-pressure close. "I'll assume the timing isn't right — no worries. I'll leave the door open if things change. You can always book a time here: [Meetings link]." Sets Lead Status → Unqualified on send.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-end">✓</div></div>
+        <div class="step-body">
+          <div class="step-label lbl-end">End</div>
+          <div class="step-title">Sequence complete — contact unenrolled</div>
+          <div class="step-desc">Contact exits sequence. If no response across all 5 steps, Lead Status is set to Unqualified. Contact remains in CRM for future re-engagement campaigns.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Auto-unenrolment rules</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Trigger</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Contact replies to any email in the sequence</td><td>Unenrol immediately — rep takes over manually</td></tr>
+        <tr><td>Contact books a meeting via Meetings link</td><td>Unenrol immediately — move Lifecycle Stage to Opportunity</td></tr>
+        <tr><td>Contact unsubscribes</td><td>Unenrol immediately — set email subscription to unsubscribed</td></tr>
+        <tr><td>All 5 steps completed with no response</td><td>Unenrol — set Lead Status to Unqualified</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Implementation notes</div>
+  <table class="table" style="background:var(--surface);border-radius:10px;overflow:hidden">
+    <thead><tr><th>Feature</th><th>Plan required</th><th>Free alternative</th></tr></thead>
+    <tbody>
+      <tr><td>Sequences builder</td><td><span class="tag tag-paid">Professional</span></td><td>Manual follow-up tasks in Contacts</td></tr>
+      <tr><td>Automated email sends</td><td><span class="tag tag-paid">Professional</span></td><td>Manual email from contact record using saved template</td></tr>
+      <tr><td>Auto-unenrolment on reply</td><td><span class="tag tag-paid">Professional</span></td><td>Manual unenrolment by rep</td></tr>
+      <tr><td>Call tasks</td><td><span class="tag tag-free">Free</span></td><td>Available on free plan via Tasks</td></tr>
+      <tr><td>Message templates</td><td><span class="tag tag-free">Free</span></td><td>Cold Outreach — Demo Request template already created</td></tr>
+    </tbody>
+  </table>
+  <div class="note">This SOP was designed for a HubSpot Professional account. In the current free demo environment, the sequence logic is fully documented. Steps 1, 3, 4, and 5 (emails) would be sent manually using the saved Cold Outreach — Demo Request template. Step 2 (call task) is available on the free plan via the Tasks feature. Full sequence automation activates on upgrade to Professional.</div>
+</div>
+
+</body>
+</html>

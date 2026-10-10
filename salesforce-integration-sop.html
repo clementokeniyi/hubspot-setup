@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Salesforce Integration SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--sf:#00a1e0;--hs:#ff7a00}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:960px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.box-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.box-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+.table tr:last-child td{border-bottom:none}
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-hs{background:rgba(255,122,0,.15);color:var(--hs)}
+.tag-sf{background:rgba(0,161,224,.15);color:var(--sf)}
+.tag-both{background:rgba(139,92,246,.15);color:#a78bfa}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+
+/* Data flow diagram */
+.flow-diagram{display:flex;align-items:center;justify-content:center;gap:0;padding:32px 24px;background:var(--surface2);border-radius:12px;flex-wrap:wrap;gap:0}
+.sys-box{border-radius:10px;padding:20px 24px;text-align:center;min-width:140px}
+.sys-hs{background:rgba(255,122,0,.15);border:2px solid var(--hs)}
+.sys-sf{background:rgba(0,161,224,.15);border:2px solid var(--sf)}
+.sys-logo{font-size:22px;margin-bottom:6px}
+.sys-name{font-size:14px;font-weight:700;color:#fff}
+.sys-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.arrow-block{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px}
+.arrow-label{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;text-align:center;max-width:100px}
+.arrow{font-size:20px;color:var(--muted)}
+.arrow-two{display:flex;flex-direction:column;align-items:center;gap:2px}
+
+.step-list{list-style:none;display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:28px;height:28px;border-radius:50%;background:rgba(59,130,246,.2);border:2px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-body{}
+.step-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+
+<h1>Integration SOP: HubSpot ↔ Salesforce</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Overview</div>
+  <div class="box">
+    <div class="box-title">Purpose</div>
+    <div class="box-desc">Establish a bi-directional sync between HubSpot (marketing & top-of-funnel CRM) and Salesforce (enterprise sales CRM) so that leads, contacts, companies, and deals flow seamlessly between both systems without manual data entry. HubSpot owns the marketing and MQL lifecycle; Salesforce owns the SQL-to-close lifecycle.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">System architecture</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <div class="flow-diagram">
+      <div class="sys-box sys-hs">
+        <div class="sys-logo">🟠</div>
+        <div class="sys-name">HubSpot</div>
+        <div class="sys-sub">Marketing CRM<br>MQL ownership</div>
+      </div>
+      <div class="arrow-block">
+        <div class="arrow-two">
+          <div style="font-size:11px;color:var(--green);font-weight:600">Leads → Contacts</div>
+          <div style="color:var(--green);font-size:18px">→</div>
+        </div>
+        <div style="height:12px"></div>
+        <div class="arrow-two">
+          <div style="color:var(--sf);font-size:18px">←</div>
+          <div style="font-size:11px;color:var(--sf);font-weight:600">Opportunities → Deals</div>
+        </div>
+      </div>
+      <div class="sys-box sys-sf">
+        <div class="sys-logo">☁️</div>
+        <div class="sys-name">Salesforce</div>
+        <div class="sys-sub">Enterprise CRM<br>SQL-to-close</div>
+      </div>
+    </div>
+    <div style="padding:16px 20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)">Integration powered by HubSpot's native Salesforce connector (available on Professional+). Sync interval: every 10 minutes. Conflict resolution: last-modified-wins per field.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Object & field mapping</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>HubSpot object</th><th>Salesforce object</th><th>Sync direction</th><th>Key fields synced</th></tr></thead>
+      <tbody>
+        <tr><td>Contact</td><td>Lead / Contact</td><td><span class="tag tag-both">↔ Bi-directional</span></td><td>First name, Last name, Email, Phone, Job title, Company, Lifecycle stage, Lead status</td></tr>
+        <tr><td>Company</td><td>Account</td><td><span class="tag tag-both">↔ Bi-directional</span></td><td>Company name, Domain, Industry, Employees, Annual revenue, Country</td></tr>
+        <tr><td>Deal</td><td>Opportunity</td><td><span class="tag tag-sf">← SF → HS</span></td><td>Deal name, Amount, Stage, Close date, Deal owner, Associated contact</td></tr>
+        <tr><td>Activity (email, call)</td><td>Activity / Task</td><td><span class="tag tag-hs">HS → SF</span></td><td>Activity type, Date, Notes, Associated contact</td></tr>
+        <tr><td>Form submission</td><td>Lead (new)</td><td><span class="tag tag-hs">HS → SF</span></td><td>All form fields mapped to Lead object on first submission</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Setup steps</div>
+  <div class="box">
+    <ul class="step-list">
+      <li class="step-item"><div class="step-num">1</div><div class="step-body"><div class="step-title">Install the HubSpot-Salesforce connector</div><div class="step-desc">In HubSpot: Settings → Integrations → Connected apps → Search "Salesforce" → Install. Requires HubSpot Professional and Salesforce System Administrator credentials.</div></div></li>
+      <li class="step-item"><div class="step-num">2</div><div class="step-body"><div class="step-title">Authenticate with Salesforce</div><div class="step-desc">Log in with Salesforce admin credentials when prompted. Grant HubSpot the required API permissions (read/write on Leads, Contacts, Accounts, Opportunities, Tasks).</div></div></li>
+      <li class="step-item"><div class="step-num">3</div><div class="step-body"><div class="step-title">Configure sync settings</div><div class="step-desc">Choose sync direction per object. Set the "Include in sync" filter — recommend syncing only contacts with Lifecycle Stage = MQL or later to avoid flooding Salesforce with unqualified leads.</div></div></li>
+      <li class="step-item"><div class="step-num">4</div><div class="step-body"><div class="step-title">Map fields</div><div class="step-desc">In the field mapping tab, map each HubSpot property to the corresponding Salesforce field. Pay special attention to custom fields — create matching custom fields in Salesforce before mapping.</div></div></li>
+      <li class="step-item"><div class="step-num">5</div><div class="step-body"><div class="step-title">Run initial sync & verify</div><div class="step-desc">Trigger a manual sync for 5 test contacts. Verify records appear correctly in Salesforce. Check for duplicates, missing fields, or formatting errors. Document any discrepancies.</div></div></li>
+      <li class="step-item"><div class="step-num">6</div><div class="step-body"><div class="step-title">Set sync error monitoring</div><div class="step-desc">Enable sync error notifications in HubSpot. Review the Sync errors log weekly (Settings → Integrations → Salesforce → Sync errors). Common errors: duplicate email, required field missing, field type mismatch.</div></div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">MQL handoff rule — when HubSpot sends to Salesforce</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Condition</th><th>HubSpot action</th><th>Salesforce result</th></tr></thead>
+      <tbody>
+        <tr><td>Lifecycle Stage changes to MQL</td><td>Sync contact to Salesforce</td><td>New Lead created in Salesforce, assigned to SDR queue</td></tr>
+        <tr><td>Lead Status = In Progress</td><td>Update Salesforce Lead status</td><td>Lead status updated to "Working"</td></tr>
+        <tr><td>Meeting booked via HubSpot Meetings</td><td>Log activity to Salesforce</td><td>New Task created on Lead/Contact record</td></tr>
+        <tr><td>Deal created in HubSpot</td><td>Create Opportunity in Salesforce</td><td>Opportunity linked to Account and Contact</td></tr>
+        <tr><td>Deal Closed Won in HubSpot</td><td>Update Opportunity stage</td><td>Opportunity marked Closed Won in Salesforce</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">This SOP is designed for a HubSpot Professional account with Salesforce Enterprise or above. The native connector requires Professional plan on HubSpot side. In the current Fyzer Co free demo account, this integration is documented as the standard operating procedure for implementation upon upgrade.</div>
+</div>
+
+</body>
+</html>

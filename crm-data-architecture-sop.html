@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CRM Data Architecture SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:1080px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+.table tr:last-child td{border-bottom:none}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+
+/* Object model diagram */
+.obj-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.obj-card{border-radius:10px;padding:16px;border:2px solid}
+.obj-contact{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.obj-company{border-color:var(--green);background:rgba(6,214,160,.06)}
+.obj-deal{border-color:var(--orange);background:rgba(245,158,11,.06)}
+.obj-icon{font-size:20px;margin-bottom:6px}
+.obj-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.obj-count{font-size:11px;font-weight:600;margin-bottom:8px}
+.obj-contact .obj-count{color:var(--accent)}
+.obj-company .obj-count{color:var(--green)}
+.obj-deal .obj-count{color:var(--orange)}
+.obj-props{list-style:none;display:flex;flex-direction:column;gap:4px}
+.obj-props li{font-size:11px;color:var(--muted);padding-left:12px;position:relative}
+.obj-props li::before{content:'·';position:absolute;left:0;color:var(--muted)}
+.rel-arrow{display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-weight:600;gap:6px;padding:4px 0}
+
+/* Pipeline visual */
+.pipeline{display:flex;gap:0;overflow-x:auto;padding-bottom:8px}
+.pipe-stage{flex:1;min-width:110px;padding:12px 10px;border-right:1px solid var(--border);background:var(--surface2);text-align:center}
+.pipe-stage:first-child{border-radius:8px 0 0 8px}
+.pipe-stage:last-child{border-right:none;border-radius:0 8px 8px 0}
+.pipe-name{font-size:11px;font-weight:700;color:#fff;margin-bottom:4px}
+.pipe-prob{font-size:10px;color:var(--muted);margin-bottom:6px}
+.pipe-bar{height:4px;border-radius:2px;margin-bottom:6px}
+.pipe-action{font-size:10px;color:var(--muted);line-height:1.4}
+
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-free{background:rgba(6,214,160,.15);color:var(--green)}
+.tag-paid{background:rgba(239,68,68,.15);color:var(--red)}
+.tag-custom{background:rgba(139,92,246,.15);color:#a78bfa}
+</style>
+</head>
+<body>
+
+<h1>CRM Data Architecture SOP</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">HubSpot object model — Fyzer Co</div>
+  <div class="box">
+    <div class="obj-diagram">
+      <div class="obj-card obj-contact">
+        <div class="obj-icon">👤</div>
+        <div class="obj-name">Contact</div>
+        <div class="obj-count">23 records</div>
+        <ul class="obj-props">
+          <li>Email (primary key)</li>
+          <li>First name / Last name</li>
+          <li>Job title</li>
+          <li>Lifecycle stage</li>
+          <li>Lead status</li>
+          <li>ICP Score ⟨custom⟩</li>
+          <li>RevOps Segment ⟨custom⟩</li>
+          <li>Outreach Cadence ⟨custom⟩</li>
+        </ul>
+      </div>
+      <div class="obj-card obj-company">
+        <div class="obj-icon">🏢</div>
+        <div class="obj-name">Company</div>
+        <div class="obj-count">20 records</div>
+        <ul class="obj-props">
+          <li>Company name (primary key)</li>
+          <li>Domain</li>
+          <li>Industry</li>
+          <li>Number of employees</li>
+          <li>Annual revenue</li>
+          <li>Country</li>
+          <li>Associated contacts →</li>
+          <li>Associated deals →</li>
+        </ul>
+      </div>
+      <div class="obj-card obj-deal">
+        <div class="obj-icon">💼</div>
+        <div class="obj-name">Deal</div>
+        <div class="obj-count">13 records</div>
+        <ul class="obj-props">
+          <li>Deal name</li>
+          <li>Pipeline</li>
+          <li>Deal stage</li>
+          <li>Amount</li>
+          <li>Close date</li>
+          <li>Deal owner</li>
+          <li>← Associated contact</li>
+          <li>← Associated company</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+      <div class="rel-arrow">👤 Contact ↔ 🏢 Company (many contacts → one company)</div>
+      <div class="rel-arrow">💼 Deal ↔ 👤 Contact (one deal → one primary contact)</div>
+      <div class="rel-arrow">💼 Deal ↔ 🏢 Company (one deal → one company)</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Sales pipeline architecture</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:rgba(100,116,139,.5)"></div>
+        <div class="pipe-name">Prospect</div>
+        <div class="pipe-prob">10%</div>
+        <div class="pipe-action">Initial contact made. Not yet qualified.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:#6366f1"></div>
+        <div class="pipe-name">Qualified</div>
+        <div class="pipe-prob">25%</div>
+        <div class="pipe-action">BANT criteria met. Moving to discovery.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:#3b82f6"></div>
+        <div class="pipe-name">Discovery</div>
+        <div class="pipe-prob">40%</div>
+        <div class="pipe-action">Discovery call completed. Pain confirmed.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--teal)"></div>
+        <div class="pipe-name">Demo</div>
+        <div class="pipe-prob">55%</div>
+        <div class="pipe-action">Product demo scheduled or completed.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--orange)"></div>
+        <div class="pipe-name">Proposal</div>
+        <div class="pipe-prob">70%</div>
+        <div class="pipe-action">Proposal sent and under review.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--purple)"></div>
+        <div class="pipe-name">Negotiation</div>
+        <div class="pipe-prob">85%</div>
+        <div class="pipe-action">Legal or pricing discussions active.</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--green)"></div>
+        <div class="pipe-name">Closed Won</div>
+        <div class="pipe-prob">100%</div>
+        <div class="pipe-action">Contract signed. Trigger CS onboarding.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Property architecture — standard + custom</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Property name</th><th>Object</th><th>Type</th><th>Values / format</th><th>Plan</th></tr></thead>
+      <tbody>
+        <tr><td>Email</td><td>Contact</td><td>Email</td><td>Lowercase email address</td><td><span class="tag tag-free">Free</span></td></tr>
+        <tr><td>Lifecycle Stage</td><td>Contact</td><td>Dropdown</td><td>Subscriber → Lead → MQL → SQL → Opportunity → Customer → Evangelist</td><td><span class="tag tag-free">Free</span></td></tr>
+        <tr><td>Lead Status</td><td>Contact</td><td>Dropdown</td><td>New · Open · In Progress · Open Deal · Unqualified · Attempted to Contact · Connected · Bad Timing</td><td><span class="tag tag-free">Free</span></td></tr>
+        <tr><td>HubSpot Score</td><td>Contact</td><td>Score</td><td>0–100+ (auto-calculated from rules)</td><td><span class="tag tag-paid">Professional</span></td></tr>
+        <tr><td>ICP Score</td><td>Contact</td><td>Number</td><td>0–100 (manual entry per scoring rubric)</td><td><span class="tag tag-custom">Custom · Free</span></td></tr>
+        <tr><td>RevOps Segment</td><td>Contact</td><td>Dropdown</td><td>Enterprise · Mid-Market · SMB · Partner · Unclassified</td><td><span class="tag tag-custom">Custom · Free</span></td></tr>
+        <tr><td>Outreach Cadence</td><td>Contact</td><td>Dropdown</td><td>High-Touch · Mid-Touch · Low-Touch · Do Not Contact</td><td><span class="tag tag-custom">Custom · Free</span></td></tr>
+        <tr><td>Deal Amount</td><td>Deal</td><td>Currency</td><td>USD value, required on all deals</td><td><span class="tag tag-free">Free</span></td></tr>
+        <tr><td>Close Date</td><td>Deal</td><td>Date</td><td>MM/DD/YYYY, required, reviewed weekly</td><td><span class="tag tag-free">Free</span></td></tr>
+        <tr><td>Number of Employees</td><td>Company</td><td>Number</td><td>Numeric, used in segmentation and lead scoring</td><td><span class="tag tag-free">Free</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Data flow — how records enter and move through the CRM</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Entry point</th><th>Object(s) created</th><th>Initial lifecycle stage</th><th>Next step</th></tr></thead>
+      <tbody>
+        <tr><td>CSV import (bulk)</td><td>Contact + Company (linked)</td><td>Lead</td><td>RevOps Admin reviews, sets Lead Status, assigns Outreach Cadence</td></tr>
+        <tr><td>Website form submission</td><td>Contact (auto-created by HubSpot)</td><td>Lead</td><td>SDR notified, lead assigned, Lead Status = New</td></tr>
+        <tr><td>Manual entry by SDR</td><td>Contact + Deal (optional)</td><td>Lead or MQL</td><td>Deal created, associated to contact and company</td></tr>
+        <tr><td>Salesforce sync (future)</td><td>Contact or Lead converted</td><td>MQL or SQL</td><td>Auto-synced when Lifecycle Stage ≥ MQL in HubSpot</td></tr>
+        <tr><td>Deal stage → Closed Won</td><td>No new object; Contact updated</td><td>Customer</td><td>Lifecycle Stage auto-updates to Customer; CS workflow triggered</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">The Fyzer Co CRM currently holds 23 contacts, 20 companies, and 13 deals — all linked with the correct associations. Three custom properties (ICP Score, RevOps Segment, Outreach Cadence) were created on the free plan and form the foundation of the manual segmentation and scoring system documented in the Lead Scoring SOP.</div>
+</div>
+
+</body>
+</html>

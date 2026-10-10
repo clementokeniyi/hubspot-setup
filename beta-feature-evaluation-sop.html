@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Beta Feature Evaluation SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:1020px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+.table tr:last-child td{border-bottom:none}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-adopt{background:rgba(6,214,160,.2);color:var(--green)}
+.tag-watch{background:rgba(245,158,11,.2);color:var(--orange)}
+.tag-decline{background:rgba(239,68,68,.2);color:var(--red)}
+.tag-eval{background:rgba(59,130,246,.2);color:var(--accent)}
+
+/* Evaluation scorecard */
+.scorecard{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.score-col{padding:14px 12px;border-right:1px solid var(--border);text-align:center}
+.score-col:last-child{border-right:none}
+.score-col-header{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.score-circle{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;margin:0 auto 6px}
+.sc1{background:rgba(6,214,160,.2);color:var(--green)}
+.sc2{background:rgba(59,130,246,.2);color:var(--accent)}
+.sc3{background:rgba(245,158,11,.2);color:var(--orange)}
+.sc4{background:rgba(139,92,246,.2);color:#a78bfa}
+.sc5{background:rgba(239,68,68,.2);color:var(--red)}
+.score-label{font-size:11px;color:var(--muted);line-height:1.3}
+
+/* Process steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.step{padding:16px 12px;text-align:center;position:relative}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin:0 auto 8px;border:2px solid}
+.step-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.step-arrow{position:absolute;top:30px;right:-6px;color:var(--border);font-size:14px;z-index:1}
+</style>
+</head>
+<body>
+
+<h1>Beta Feature Evaluation SOP</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Purpose</div>
+  <div class="box">
+    <div style="font-size:13px;color:var(--muted);line-height:1.6">HubSpot regularly releases beta features and product updates through its product labs, early access programs, and release notes. This SOP establishes how the RevOps team at Fyzer Co evaluates new HubSpot features — whether to adopt immediately, monitor, or decline — before enabling them in production. A structured evaluation prevents unintended workflow disruption, protects data quality, and ensures new features deliver measurable value.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">5-step evaluation process</div>
+  <div class="box" style="padding:16px">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="border-color:var(--accent);color:var(--accent)">1</div>
+        <div class="step-name">Discover</div>
+        <div class="step-desc">Find the feature via HubSpot Product Updates, Product Labs, or What's New page. Log it in the evaluation tracker.</div>
+        <div class="step-arrow">›</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="border-color:var(--purple);color:#a78bfa">2</div>
+        <div class="step-name">Score</div>
+        <div class="step-desc">Score the feature on 5 criteria (see scorecard). Total score drives the initial recommendation.</div>
+        <div class="step-arrow">›</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="border-color:var(--orange);color:var(--orange)">3</div>
+        <div class="step-name">Sandbox test</div>
+        <div class="step-desc">Enable in the HubSpot demo sandbox only. Run test scenarios with dummy contacts. Document findings.</div>
+        <div class="step-arrow">›</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="border-color:var(--green);color:var(--green)">4</div>
+        <div class="step-name">Decision</div>
+        <div class="step-desc">RevOps Admin reviews sandbox results. Makes Adopt / Watch / Decline decision. Communicates to team.</div>
+        <div class="step-arrow">›</div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="border-color:var(--muted);color:var(--muted)">5</div>
+        <div class="step-name">Monitor</div>
+        <div class="step-desc">If Adopted: track usage and impact for 30 days. Re-evaluate if issues arise. Update SOP docs.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Scoring criteria (1–5 per dimension)</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <div class="scorecard">
+      <div class="score-col" style="background:var(--surface2)">
+        <div class="score-col-header">RevOps Relevance</div>
+        <div class="score-circle sc1">R</div>
+        <div class="score-label">Does it directly improve pipeline, data quality, or reporting?</div>
+      </div>
+      <div class="score-col" style="background:var(--surface2)">
+        <div class="score-col-header">Implementation Risk</div>
+        <div class="score-circle sc2">I</div>
+        <div class="score-label">How likely is it to disrupt existing workflows or data? (lower = less risky)</div>
+      </div>
+      <div class="score-col" style="background:var(--surface2)">
+        <div class="score-col-header">Time to Value</div>
+        <div class="score-circle sc3">T</div>
+        <div class="score-label">How quickly will the team see measurable benefit from enabling it?</div>
+      </div>
+      <div class="score-col" style="background:var(--surface2)">
+        <div class="score-col-header">Team Adoption</div>
+        <div class="score-circle sc4">A</div>
+        <div class="score-label">How easy is it for reps and marketers to learn and use?</div>
+      </div>
+      <div class="score-col" style="background:var(--surface2)">
+        <div class="score-col-header">Cost Impact</div>
+        <div class="score-circle sc5">$</div>
+        <div class="score-label">Does it require a plan upgrade or add-on cost? (higher = lower cost)</div>
+      </div>
+    </div>
+    <div style="padding:14px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--border)">
+      Score each dimension 1–5. Total score = R + I + T + A + $. Decision thresholds: <strong style="color:var(--green)">Adopt (18–25)</strong> · <strong style="color:var(--orange)">Watch (11–17)</strong> · <strong style="color:var(--red)">Decline (5–10)</strong>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Recent feature evaluations — Fyzer Co HubSpot account</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Feature</th><th>Discovered</th><th>Score</th><th>Decision</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600">Breeze AI Copilot</td>
+          <td>Sep 2026</td>
+          <td>22/25</td>
+          <td><span class="tag tag-adopt">Adopt</span></td>
+          <td>High relevance (CRM commands, email drafting), available on free plan, low risk, fast time-to-value.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">AI Content Assistant in emails</td>
+          <td>Sep 2026</td>
+          <td>20/25</td>
+          <td><span class="tag tag-adopt">Adopt</span></td>
+          <td>Free feature, no disruption risk. Speeds up email template writing for sequences.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Breeze Prospecting Agent</td>
+          <td>Oct 2026</td>
+          <td>16/25</td>
+          <td><span class="tag tag-watch">Watch</span></td>
+          <td>High value for SDR workflow but requires Professional plan. Monitor until upgrade decision.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Breeze Intelligence (Data Enrichment)</td>
+          <td>Oct 2026</td>
+          <td>14/25</td>
+          <td><span class="tag tag-watch">Watch</span></td>
+          <td>Significant time saver for manual data entry but charged per record. Evaluate ROI against data research cost.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">HubSpot Payments (Beta)</td>
+          <td>Oct 2026</td>
+          <td>8/25</td>
+          <td><span class="tag tag-decline">Decline</span></td>
+          <td>Not applicable to Fyzer Co's B2B SaaS model. No RevOps use case. US-only feature.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">Predictive Lead Scoring</td>
+          <td>Oct 2026</td>
+          <td>17/25</td>
+          <td><span class="tag tag-watch">Watch</span></td>
+          <td>Enterprise only, and requires 200+ closed deals for training data. Adopt when scale is reached.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Where to find HubSpot beta features</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Source</th><th>How to access</th><th>Frequency</th></tr></thead>
+      <tbody>
+        <tr><td>HubSpot Product Updates</td><td>HubSpot dashboard → click the question mark icon → "What's New"</td><td>Weekly</td></tr>
+        <tr><td>HubSpot Product Labs</td><td>HubSpot dashboard → Settings → Product Labs (opt-in betas)</td><td>Monthly check</td></tr>
+        <tr><td>HubSpot Community</td><td>community.hubspot.com → Ideas board and Beta program posts</td><td>Monitor</td></tr>
+        <tr><td>HubSpot Academy</td><td>academy.hubspot.com → New course announcements often signal new features</td><td>Monthly check</td></tr>
+        <tr><td>HubSpot blog & changelog</td><td>hubspot.com/blog and developers.hubspot.com/changelog</td><td>Weekly</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">The RevOps Admin (C Okeniyi) is responsible for monitoring HubSpot's Product Updates page weekly and logging any new features relevant to the RevOps function into the evaluation tracker. All "Adopt" decisions are tested in a sandbox environment first and communicated to the team via a brief Slack post before enabling in production.</div>
+</div>
+
+</body>
+</html>

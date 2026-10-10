@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Workflow SOP — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:900px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}
+.meta span{color:var(--accent);font-weight:600}
+
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.box-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.box-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* Workflow diagram */
+.flow{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:4px 0}
+.step{display:flex;align-items:flex-start;gap:14px;margin-bottom:0}
+.step-line{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0}
+.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;z-index:1}
+.dot-trigger{background:rgba(59,130,246,.2);border:2px solid var(--accent);color:var(--accent)}
+.dot-condition{background:rgba(245,158,11,.2);border:2px solid var(--orange);color:var(--orange)}
+.dot-delay{background:rgba(139,92,246,.2);border:2px solid var(--purple);color:var(--purple)}
+.dot-action{background:rgba(6,214,160,.2);border:2px solid var(--green);color:var(--green)}
+.dot-end{background:rgba(239,68,68,.2);border:2px solid var(--red);color:var(--red)}
+.connector{width:2px;background:var(--border);height:28px;margin:0 auto}
+.step-body{padding-top:5px;padding-bottom:28px;min-width:0}
+.step-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.lbl-trigger{color:var(--accent)}
+.lbl-condition{color:var(--orange)}
+.lbl-delay{color:var(--purple)}
+.lbl-action{color:var(--green)}
+.lbl-end{color:var(--red)}
+.step-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.branch{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+.branch-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-size:12px;flex:1;min-width:160px}
+.branch-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.branch-yes{color:var(--green)}
+.branch-no{color:var(--red)}
+
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.table tr:last-child td{border-bottom:none}
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-free{background:rgba(6,214,160,.15);color:var(--green)}
+.tag-paid{background:rgba(239,68,68,.15);color:var(--red)}
+
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+</style>
+</head>
+<body>
+
+<h1>Workflow SOP: Demo Request Lead Nurture</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Overview</div>
+  <div class="box">
+    <div class="box-title">Purpose</div>
+    <div class="box-desc">Automatically enrol and nurture every contact who submits the Fyzer Co demo request form. The workflow assigns the contact to the correct lifecycle stage, sends a confirmation email, and creates a follow-up task for the sales owner — eliminating manual handoff lag and ensuring no lead falls through the cracks.</div>
+  </div>
+  <div class="box">
+    <div class="box-title">Enrolment trigger</div>
+    <div class="box-desc">Contact submits the <strong style="color:#fff">Fyzer Co - Demo Request Form</strong> on any page of clementokeniyi.github.io</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Workflow map</div>
+  <div class="box" style="padding:24px 28px">
+    <div class="flow">
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-trigger">⚡</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-trigger">Trigger</div>
+          <div class="step-title">Form submitted — Demo Request Form</div>
+          <div class="step-desc">Contact fills in the HubSpot form on contact.html. Enrolment fires immediately on submission.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-action">1</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-action">Action</div>
+          <div class="step-title">Set Lifecycle Stage → Marketing Qualified Lead</div>
+          <div class="step-desc">Updates the contact's Lifecycle Stage property from Lead → MQL to signal intent to the sales team.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-action">2</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-action">Action</div>
+          <div class="step-title">Send confirmation email — "We received your demo request"</div>
+          <div class="step-desc">Automated email sent immediately to the contact confirming receipt and setting expectations (response within 1 business day).</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 10 minutes</div>
+          <div class="step-desc">Buffer before creating the sales task — allows time for the contact record to fully sync and enrich.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-action">3</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-action">Action</div>
+          <div class="step-title">Create task for deal owner — "Follow up: demo request"</div>
+          <div class="step-desc">Creates a HubSpot task assigned to C Okeniyi with due date of next business day. Task note includes the contact's message field value.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-condition">?</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-condition">Branch / If-Then</div>
+          <div class="step-title">Is Company Size = 100+ employees?</div>
+          <div class="step-desc">Routes the lead to the appropriate follow-up track based on company size property.</div>
+          <div class="branch">
+            <div class="branch-box">
+              <div class="branch-label branch-yes">✓ Yes — Enterprise</div>
+              Set Lead Status → In Progress<br>Add to "Enterprise Prospects" list<br>Notify owner via Slack (if connected)
+            </div>
+            <div class="branch-box">
+              <div class="branch-label branch-no">✗ No — SMB</div>
+              Set Lead Status → New<br>Add to "SMB Prospects" list<br>Enrol in 3-email nurture sequence
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-delay">⏱</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-delay">Delay</div>
+          <div class="step-title">Wait 3 business days</div>
+          <div class="step-desc">If no meeting booked and lead status has not changed to "Connected", send a follow-up email.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-condition">?</div><div class="connector"></div></div>
+        <div class="step-body">
+          <div class="step-label lbl-condition">Branch / If-Then</div>
+          <div class="step-title">Has a meeting been booked?</div>
+          <div class="step-desc">Checks if the contact has a Meeting activity logged in the last 3 days.</div>
+          <div class="branch">
+            <div class="branch-box">
+              <div class="branch-label branch-yes">✓ Yes</div>
+              Set Lifecycle Stage → Opportunity<br>End workflow — contact is being worked
+            </div>
+            <div class="branch-box">
+              <div class="branch-label branch-no">✗ No</div>
+              Send follow-up email: "Still interested in a demo?"<br>Wait 5 more days → if still no response, set Lead Status → Unqualified
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-line"><div class="step-dot dot-end">✓</div></div>
+        <div class="step-body">
+          <div class="step-label lbl-end">End</div>
+          <div class="step-title">Workflow complete</div>
+          <div class="step-desc">Contact is either progressed to Opportunity or marked Unqualified for future re-engagement.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Properties updated by this workflow</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Property</th><th>Before</th><th>After</th><th>Trigger</th></tr></thead>
+      <tbody>
+        <tr><td>Lifecycle Stage</td><td style="color:var(--muted)">Lead</td><td style="color:var(--green)">MQL → Opportunity</td><td>Form submit + meeting booked</td></tr>
+        <tr><td>Lead Status</td><td style="color:var(--muted)">—</td><td style="color:var(--green)">New / In Progress / Unqualified</td><td>Branch conditions</td></tr>
+        <tr><td>Last Activity Date</td><td style="color:var(--muted)">—</td><td style="color:var(--green)">Auto-updated</td><td>Each action</td></tr>
+        <tr><td>List membership</td><td style="color:var(--muted)">—</td><td style="color:var(--green)">Enterprise or SMB Prospects</td><td>Size branch</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Implementation notes</div>
+  <table class="table" style="background:var(--surface);border-radius:10px;overflow:hidden">
+    <thead><tr><th>Step</th><th>HubSpot Plan Required</th><th>Free Alternative</th></tr></thead>
+    <tbody>
+      <tr><td>Workflow builder</td><td><span class="tag tag-paid">Professional</span></td><td>Manual lifecycle update on contact record</td></tr>
+      <tr><td>Automated email</td><td><span class="tag tag-paid">Professional</span></td><td>Manual email from contact record</td></tr>
+      <tr><td>Create task</td><td><span class="tag tag-free">Free</span></td><td>Available on free plan via Tasks</td></tr>
+      <tr><td>List enrolment</td><td><span class="tag tag-free">Free</span></td><td>Available via Active Lists on free plan</td></tr>
+      <tr><td>Slack notification</td><td><span class="tag tag-paid">Professional</span></td><td>Manual check of activity feed</td></tr>
+    </tbody>
+  </table>
+  <div class="note">This SOP was designed for a HubSpot Professional account. In the current free demo environment, the workflow logic has been documented and mapped in full. The trigger (form submission), task creation, and list management steps are executable on the free plan. Full automation would be activated upon upgrade to Professional.</div>
+</div>
+
+</body>
+</html>

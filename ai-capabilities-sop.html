@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HubSpot AI Capabilities — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--gold:#f59e0b}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:1060px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+.table tr:last-child td{border-bottom:none}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+
+.tag{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600}
+.tag-free{background:rgba(6,214,160,.15);color:var(--green)}
+.tag-starter{background:rgba(59,130,246,.15);color:var(--accent)}
+.tag-pro{background:rgba(245,158,11,.15);color:var(--orange)}
+.tag-ent{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* Breeze AI feature grid */
+.ai-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:0}
+.ai-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px;position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.ai-card.free-card::before{background:var(--green)}
+.ai-card.pro-card::before{background:var(--orange)}
+.ai-card.ent-card::before{background:var(--purple)}
+.ai-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px}
+.ai-card-name{font-size:14px;font-weight:700;color:#fff}
+.ai-card-body{font-size:12px;color:var(--muted);line-height:1.6}
+.ai-card-usecase{margin-top:8px;font-size:11px;font-weight:600;color:var(--text)}
+</style>
+</head>
+<body>
+
+<h1>HubSpot AI (Breeze) Capabilities Documentation</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Overview</div>
+  <div class="box">
+    <div style="font-size:13px;color:var(--muted);line-height:1.6">HubSpot's AI suite is branded <strong style="color:#fff">Breeze</strong>, consisting of Breeze Copilot, Breeze Agents, and Breeze Intelligence. These tools automate time-consuming RevOps tasks including content creation, contact data enrichment, deal forecasting, and predictive lead scoring. This document maps each Breeze feature to its plan requirement, use case, and how Fyzer Co would leverage it at scale.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Breeze feature map by plan</div>
+  <div class="ai-grid">
+    <div class="ai-card free-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">✍️ AI Content Assistant</div>
+        <span class="tag tag-free">Free</span>
+      </div>
+      <div class="ai-card-body">AI writing assistant built into email templates, forms, landing pages, and blogs. Rewrites, expands, or shortens selected text. Generates subject line suggestions.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Draft cold outreach email templates, generate demo request follow-up email subject lines, write company descriptions on import.</div>
+    </div>
+    <div class="ai-card free-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">💬 ChatSpot (Breeze Copilot)</div>
+        <span class="tag tag-free">Free</span>
+      </div>
+      <div class="ai-card-body">Conversational AI assistant inside HubSpot. Use plain-language commands to create contacts, pull reports, summarise deals, draft emails, and search the CRM. Accessible via the chat icon in the HubSpot top bar.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: "Show me all contacts in the SaaS industry with lifecycle stage = MQL", "Create a summary of the Nexara Technologies deal", "Draft a follow-up email for James Okafor".</div>
+    </div>
+    <div class="ai-card pro-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">🎯 Predictive Lead Scoring</div>
+        <span class="tag tag-ent">Enterprise</span>
+      </div>
+      <div class="ai-card-body">Breeze automatically scores contacts based on historical closed-won deal patterns. Replaces manual rule-based HubSpot Score. Updates in real time as contact behaviour changes. Requires 200+ closed deals for the model to train on.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Auto-prioritise the top 10% of leads for same-day outreach. Surface rising contacts before SDRs manually check. Replace manual ICP Score property on upgrade to Enterprise.</div>
+    </div>
+    <div class="ai-card pro-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">📊 AI Forecast Assist</div>
+        <span class="tag tag-pro">Professional</span>
+      </div>
+      <div class="ai-card-body">Breeze analyses deal activity, stage velocity, and historical close rates to generate an AI-assisted revenue forecast. Shows a predicted commit range alongside the manual forecast in the Deals view.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Provide CRO with a weekly AI-assisted pipeline call that flags deals at risk of slipping based on no recent activity or stalled stage progression.</div>
+    </div>
+    <div class="ai-card pro-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">🤖 Breeze Prospecting Agent</div>
+        <span class="tag tag-pro">Professional</span>
+      </div>
+      <div class="ai-card-body">AI agent that researches a company or contact, pulls public information, and drafts a personalised outreach email. Works from inside a contact record. Uses publicly available web data and LinkedIn signals.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Before an SDR makes an outreach call, run Prospecting Agent on the company to auto-populate deal context, pain points, and a personalised first email.</div>
+    </div>
+    <div class="ai-card ent-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">🧠 Breeze Intelligence (Data Enrichment)</div>
+        <span class="tag tag-ent">Add-on</span>
+      </div>
+      <div class="ai-card-body">Automatically enriches contact and company records with missing data — job titles, company size, industry, technologies used — sourced from Breeze's proprietary data network. Reduces manual data entry. Charged per enriched record.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: After a form submission creates a bare-bones contact (just email + name), Breeze Intelligence auto-fills company, job title, employee count — enabling instant lead scoring without SDR research time.</div>
+    </div>
+    <div class="ai-card ent-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">📧 Breeze Email Agent</div>
+        <span class="tag tag-ent">Enterprise</span>
+      </div>
+      <div class="ai-card-body">Fully autonomous AI agent that monitors the inbox, classifies replies, auto-drafts responses for review, and handles routine email tasks (schedule meeting, send collateral, answer FAQs). Human review required before sending.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Route inbound replies from sequences — classify as "interested", "not interested", "out of office", "referral" — and auto-draft the appropriate next step for the SDR to approve.</div>
+    </div>
+    <div class="ai-card free-card">
+      <div class="ai-card-header">
+        <div class="ai-card-name">🔍 AI Deal Summary</div>
+        <span class="tag tag-free">Free</span>
+      </div>
+      <div class="ai-card-body">One-click AI summary of any deal record, synthesising all associated emails, calls, notes, and meetings into a concise status update. Accessible from the Deal record sidebar.</div>
+      <div class="ai-card-usecase">Fyzer Co use case: Before any deal review meeting, reps pull a 30-second AI summary instead of scrolling through 3 months of activity. Used for handoffs from SDR to AE, and AE to CS on close.</div>
+    </div>
+  </div>
+  <div class="note">All four "Free" tier AI features (Content Assistant, Breeze Copilot, AI Deal Summary, and basic email generation) are available in the current Fyzer Co free demo account. The Professional and Enterprise features are documented here as the target-state architecture for a scaled RevOps team.</div>
+</div>
+
+<div class="section">
+  <div class="section-title">Breeze AI plan availability summary</div>
+  <div class="box" style="padding:0;overflow:hidden">
+    <table class="table">
+      <thead><tr><th>Feature</th><th>Free</th><th>Starter</th><th>Professional</th><th>Enterprise</th></tr></thead>
+      <tbody>
+        <tr><td>AI Content Assistant</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>Breeze Copilot (ChatSpot)</td><td style="color:var(--green)">✓ Limited</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>AI Deal Summary</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>AI Forecast Assist</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>Breeze Prospecting Agent</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--green)">✓</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>Predictive Lead Scoring</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>Breeze Email Agent</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--green)">✓</td></tr>
+        <tr><td>Breeze Intelligence (Enrichment)</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td><td style="color:var(--orange)">Add-on</td><td style="color:var(--orange)">Add-on</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

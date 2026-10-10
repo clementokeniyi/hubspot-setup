@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Customer Journey Map — Fyzer Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<style>
+:root{--bg:#0b0f1a;--surface:#121826;--surface2:#1a2235;--border:#1e2d45;--text:#e2e8f0;--muted:#64748b;--accent:#3b82f6;--green:#06d6a0;--orange:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:40px 24px;max-width:1100px;margin:0 auto}
+h1{font-family:'Manrope',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;color:#fff}
+.meta{font-size:13px;color:var(--muted);margin-bottom:32px}.meta span{color:var(--accent);font-weight:600}
+.section{margin-bottom:36px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:14px 16px;font-size:12px;color:#93c5fd;line-height:1.6;margin-top:16px}
+
+/* Journey map */
+.journey{overflow-x:auto;padding-bottom:8px}
+.journey-table{min-width:900px;border-collapse:collapse;width:100%}
+.journey-table th{background:var(--surface2);padding:12px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--border);text-align:center}
+.journey-table td{padding:12px 14px;border:1px solid var(--border);font-size:12px;color:var(--muted);vertical-align:top;line-height:1.5}
+.stage-header{text-align:center;font-weight:700;font-size:13px;color:#fff}
+.stage-badge{display:inline-block;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;margin-bottom:4px}
+.s1{background:rgba(139,92,246,.2);color:#a78bfa}
+.s2{background:rgba(59,130,246,.2);color:#60a5fa}
+.s3{background:rgba(20,184,166,.2);color:#2dd4bf}
+.s4{background:rgba(245,158,11,.2);color:#fbbf24}
+.s5{background:rgba(6,214,160,.2);color:var(--green)}
+.s6{background:rgba(239,68,68,.2);color:#f87171}
+.row-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);writing-mode:horizontal-tb;width:100px;background:var(--surface2)}
+.touchpoint{background:var(--surface);border-radius:6px;padding:6px 8px;margin-bottom:4px;font-size:11px;color:var(--text)}
+.emotion-bar{height:6px;border-radius:3px;margin-top:6px}
+.pain{color:var(--red);font-size:11px}
+.opp{color:var(--green);font-size:11px;font-weight:600}
+</style>
+</head>
+<body>
+
+<h1>Customer Journey Map: B2B SaaS Buyer</h1>
+<div class="meta">Fyzer Co HubSpot Account · Prepared by <span>C Okeniyi, RevOps Admin</span> · October 2026</div>
+
+<div class="section">
+  <div class="section-title">Persona</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:0">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Primary persona</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:4px">The RevOps Manager</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5">Mid-market B2B company, 50–500 employees. Owns the CRM, sales process, and pipeline reporting. Frustrated by data silos and manual reporting.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Goals</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">Clean pipeline data · Accurate forecasts · Automated handoffs · Fewer manual updates · Prove marketing ROI</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Pain points</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">Messy CRM data · Reps not updating deals · Marketing ≠ Sales alignment · No visibility into attribution · Too many tools</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Journey map</div>
+  <div class="journey">
+    <table class="journey-table">
+      <thead>
+        <tr>
+          <th style="width:90px">Row</th>
+          <th><span class="stage-badge s1">Awareness</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">Stranger → Visitor</span></th>
+          <th><span class="stage-badge s2">Consideration</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">Visitor → Lead</span></th>
+          <th><span class="stage-badge s3">Decision</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">Lead → MQL</span></th>
+          <th><span class="stage-badge s4">Purchase</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">MQL → Customer</span></th>
+          <th><span class="stage-badge s5">Onboarding</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">Customer → Active</span></th>
+          <th><span class="stage-badge s6">Advocacy</span><br><span style="font-size:10px;color:var(--muted);font-weight:400">Active → Promoter</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Buyer actions</td>
+          <td>Searches "RevOps tools for HubSpot"<br>Reads LinkedIn posts<br>Sees a Fyzer ad</td>
+          <td>Visits fyzerco.com<br>Reads blog posts<br>Compares competitors<br>Downloads a guide</td>
+          <td>Submits demo request form<br>Attends webinar<br>Shares with manager</td>
+          <td>Attends demo call<br>Reviews proposal<br>Negotiates contract<br>Signs agreement</td>
+          <td>Completes onboarding<br>Connects data sources<br>Trains the team<br>Sets up dashboards</td>
+          <td>Shares results internally<br>Leaves G2 review<br>Refers a colleague<br>Joins Fyzer community</td>
+        </tr>
+        <tr>
+          <td class="row-label">Touchpoints</td>
+          <td>
+            <div class="touchpoint">🔍 Google / SEO</div>
+            <div class="touchpoint">📱 LinkedIn Ads</div>
+            <div class="touchpoint">📝 Blog content</div>
+          </td>
+          <td>
+            <div class="touchpoint">🌐 Website pages</div>
+            <div class="touchpoint">📧 Nurture emails</div>
+            <div class="touchpoint">🎥 Demo video</div>
+          </td>
+          <td>
+            <div class="touchpoint">📋 Demo request form</div>
+            <div class="touchpoint">📞 SDR outreach</div>
+            <div class="touchpoint">🎯 Sequences</div>
+          </td>
+          <td>
+            <div class="touchpoint">📅 Demo meeting</div>
+            <div class="touchpoint">📄 Proposal doc</div>
+            <div class="touchpoint">✍️ Contract signing</div>
+          </td>
+          <td>
+            <div class="touchpoint">🚀 Onboarding call</div>
+            <div class="touchpoint">📚 Help docs</div>
+            <div class="touchpoint">💬 Slack channel</div>
+          </td>
+          <td>
+            <div class="touchpoint">🌟 NPS survey</div>
+            <div class="touchpoint">📣 Case study</div>
+            <div class="touchpoint">👥 Referral program</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="row-label">HubSpot actions</td>
+          <td style="font-size:11px;color:var(--muted)">Cookie visitor<br>Track UTM source<br>Score +0 (unknown)</td>
+          <td style="font-size:11px;color:var(--muted)">Create contact record<br>Set source = Organic<br>Lifecycle = Lead</td>
+          <td style="font-size:11px;color:var(--muted)">Lifecycle → MQL<br>Enrol in workflow<br>Create SDR task</td>
+          <td style="font-size:11px;color:var(--muted)">Lifecycle → Opportunity<br>Create deal record<br>Log all activities</td>
+          <td style="font-size:11px;color:var(--muted)">Lifecycle → Customer<br>Deal → Closed Won<br>Trigger CS workflow</td>
+          <td style="font-size:11px;color:var(--muted)">Send NPS survey<br>Log referral activity<br>Create upsell deal</td>
+        </tr>
+        <tr>
+          <td class="row-label">Emotion</td>
+          <td style="text-align:center;color:var(--muted)">😐 Unaware<br><div class="emotion-bar" style="background:linear-gradient(to right,#374151,#4b5563)"></div></td>
+          <td style="text-align:center;color:#60a5fa">🤔 Curious<br><div class="emotion-bar" style="background:linear-gradient(to right,#1d4ed8,#3b82f6)"></div></td>
+          <td style="text-align:center;color:var(--orange)">😟 Evaluating<br><div class="emotion-bar" style="background:linear-gradient(to right,#92400e,#f59e0b)"></div></td>
+          <td style="text-align:center;color:#fbbf24">🤝 Hopeful<br><div class="emotion-bar" style="background:linear-gradient(to right,#78350f,#f59e0b)"></div></td>
+          <td style="text-align:center;color:var(--green)">😊 Confident<br><div class="emotion-bar" style="background:linear-gradient(to right,#065f46,#06d6a0)"></div></td>
+          <td style="text-align:center;color:#a78bfa">🌟 Delighted<br><div class="emotion-bar" style="background:linear-gradient(to right,#4c1d95,#8b5cf6)"></div></td>
+        </tr>
+        <tr>
+          <td class="row-label">Pain points</td>
+          <td><span class="pain">Can't find the right solution in the noise</span></td>
+          <td><span class="pain">Too much info, hard to compare options</span></td>
+          <td><span class="pain">Fear of long onboarding or hidden costs</span></td>
+          <td><span class="pain">Approval process slows decision</span></td>
+          <td><span class="pain">Team adoption is slow</span></td>
+          <td><span class="pain">Hard to quantify ROI to leadership</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Opportunities</td>
+          <td><span class="opp">→ SEO content targeting "RevOps tools"</span></td>
+          <td><span class="opp">→ ROI calculator on pricing page</span></td>
+          <td><span class="opp">→ Fast demo scheduling (same-day)</span></td>
+          <td><span class="opp">→ Champion enablement kit for internal approval</span></td>
+          <td><span class="opp">→ Quick wins playbook for week 1</span></td>
+          <td><span class="opp">→ ROI report template to share with C-suite</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">This journey map is maintained in HubSpot and reviewed quarterly by the RevOps Admin. Lifecycle stage transitions and form submission data from HubSpot feed directly into measuring journey progression. The Contact Sources chart in the CRM Data Overview dashboard tracks how buyers enter at each stage.</div>
+</div>
+
+</body>
+</html>
